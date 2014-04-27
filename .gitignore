@@ -32,3 +32,7 @@ public/
 
 # Bower stuff.
 bower_components/
+
+# Config files
+config.json
+wwoof-config.js
