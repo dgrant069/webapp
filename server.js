@@ -62,9 +62,11 @@ app.use(express.static('public'));
 app.use(passport.initialize());
 app.use(app.router);
 
+    app.use(express.logger('dev'));
+
 // Development only configuration
 app.configure('development', function () {
-    app.use(express.logger('dev'));
+
     app.use(express.errorHandler());
 });
 
