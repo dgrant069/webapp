@@ -3,6 +3,7 @@ var application = require('./controllers/application');
 var login = require('./controllers/login');
 var users = require('./controllers/users');
 var hosts = require('./controllers/hosts');
+var addresses = require('./controllers/addresses');
 var photos = require('./controllers/photos');
 var departments = require('./controllers/departments');
 var wwoofers = require('./controllers/wwoofers');
@@ -24,6 +25,11 @@ module.exports = function (app) {
     app.get('/api/hosts', hosts.index);
     app.get('/api/hosts/:id', hosts.single);
     app.put('/api/hosts/:id', passport.authenticate('bearer', { session: false }), hosts.update);
+    app.post('/api/hosts', passport.authenticate('bearer', { session: false }), hosts.create);
+
+    app.put('/api/addresses/:id', passport.authenticate('bearer', { session: false }), addresses.update);
+    app.post('/api/addresses', passport.authenticate('bearer', { session: false }), addresses.create);
+    app.delete('/api/addresses/:id', passport.authenticate('bearer', { session: false }), addresses.delete);
 
     app.get('/api/photos', photos.index);
     app.get('/api/photos/:id', photos.single);

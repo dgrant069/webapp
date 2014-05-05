@@ -9,7 +9,7 @@ This application is beeing developed by volonteers and will eventually replace t
     * [Node.js](http://nodejs.org): `brew install node` on OS X
     * [Brunch](http://brunch.io): `npm install -g brunch`
     * [Bower](http://bower.io): `npm install -g bower`
-    * Brunch plugins and Bower dependencies: `npm install & bower install`.
+    * Node.js and Bower packages: `npm install & bower install`
     * MySql server and client
 * Configure:
     * Edit the `config.json` file at the root of the project.

@@ -15,13 +15,13 @@ module.exports = function (sequelize, DataTypes) {
         paymentType: DataTypes.ENUM('PPL', 'CHQ'),
         deletionDate: DataTypes.DATE
     }, {
-        tableName: 'wwoofer',
+        tableName: 'wwoofers',
         classMethods: {
             associate: function (models) {
-                Wwoofer.belongsTo(models.User)
+                Wwoofer.belongsTo(models.User);
                 Wwoofer.belongsTo(models.Address)
             }
         }
-    })
+    });
     return Wwoofer
-}
+};

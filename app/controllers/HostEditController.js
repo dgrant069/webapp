@@ -1,13 +1,15 @@
-/**
- * Ember controller for host creation.
- */
-App.HostsNewController = Ember.ObjectController.extend({
+App.HostEditController = Ember.ObjectController.extend({
 
-    needs: ['countries', 'departments'],
+    countries: function () {
+        return this.store.find('country');
+    }.property(),
+
+    departments: function () {
+        return this.store.find('department');
+    }.property(),
 
     actions: {
         saveHost: function () {
-
             var host = this.get('model');
             var address = host.get('address');
 
@@ -16,21 +18,17 @@ App.HostsNewController = Ember.ObjectController.extend({
 //                return;
 //            }
 
-            // Reset website to null to pass server-side validation (only accept null, and not empty string)
-            if (host.get('webSite') === '')
-                host.set('webSite', null);
-
             // Validate and save
             host.save()
                 .then(function () {
                     address.save()
                         .then(function () {
-                            alertify.success('Host created!');
+                            alertify.success('Information updated!');
                         }).catch(function () {
-                            // TODO: redirect user to host edit page to complete the form
+                            alertify.error('Cannot update the address.');
                         });
                 }).catch(function () {
-                    alertify.error('Cannot save the host.');
+                    alertify.error('Cannot update the host.');
                 });
         }
     }
