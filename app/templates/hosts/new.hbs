@@ -13,10 +13,13 @@
                 <label for="farm-name" class="control-label">Farm Name</label>
                 {{input type="text" id="farm-name" name="farm-name" value=farmName class="form-control" placeholder="La Ferme de M. Seguin"}}
             </div>
-
             <div {{bind-attr class=":form-group"}}>
-                <label for="address" class="control-label">Address</label>
+                <label for="address" class="control-label">Address 1</label>
                 {{input type="text" id="address1" name="address1" value=address.address1 class="form-control" placeholder="Numéro et nom de rue, chemin, hameau"}}
+            </div>
+            <div {{bind-attr class=":form-group"}}>
+                <label for="address" class="control-label">Address 2</label>
+                {{input type="text" id="address2" name="address2" value=address.address2 class="form-control" placeholder="Numéro et nom de rue, chemin, hameau"}}
             </div>
             <div class="row">
                 <div class="col-md-4">
@@ -32,11 +35,51 @@
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div {{bind-attr class=":form-group"}}>
+                        <label for="country" class="control-label">Country</label>
+                        {{view Ember.Select
+                        content=controllers.countries.content
+                        optionValuePath="content.id"
+                        optionLabelPath="content.name"
+                        selection=address.country
+                        class="form-control"
+                        name="country"
+                        prompt="Select a country"}}
+                    </div>
+                </div>
+                {{#if address.country.countryIsFrance}}
+                    <div class="col-md-6">
+                        <div {{bind-attr class=":form-group"}}>
+                            <label for="department" class="control-label">Department</label>
+                            {{view Ember.Select
+                            content=controllers.departments.content
+                            optionValuePath="content.id"
+                            optionLabelPath="content.name"
+                            selection=address.department
+                            class="form-control"
+                            name="department"}}
+                        </div>
+                    </div>
+                {{else}}
+                    <div class="col-md-6">
+                        <div {{bind-attr class=":form-group"}}>
+                            <label for="state" class="control-label">State / Region</label>
+                            {{input type="text" id="state" name="state" value=address.state class="form-control" placeholder="State"}}
+                        </div>
+                    </div>
+                {{/if}}
+            </div>
         </div>
         <div class="col-md-6">
             <div {{bind-attr class=":form-group"}}>
                 <label for="web" class="control-label">Website</label>
                 {{input type="text" id="webSite" name="webSite" value=webSite class="form-control" placeholder="http://www.ma-page-perso.fr"}}
+            </div>
+            <div {{bind-attr class=":form-group"}}>
+                <label for="shortDescription" class="control-label">Short description</label>
+                {{input type="text" id="shortDescription" name="shortDescription" value=shortDescription class="form-control" placeholder="Ferme biologique au coeur des Alpes"}}
             </div>
             <div {{bind-attr class=":form-group"}}>
                 <label for="travel" class="control-label">Travel</label>
@@ -47,7 +90,7 @@
     <div class="row">
         <div class="col-md-12">
             <div {{bind-attr class=":form-group"}}>
-                <label for="entry" class="control-label">Entry</label>
+                <label for="entry" class="control-label">Full description</label>
                 {{textarea id="fullDescription" name="fullDescription" value=fullDescription class="form-control" placeholder=""}}
             </div>
         </div>
@@ -64,7 +107,7 @@
 <form class="row" {{action "addPhoto" on="submit"}}>
     <div class="form-group">
         <label for="file_upload" class="control-label">Pick a file</label>
-        <input id="file_upload" type="file" name="files[]" data-url="/api/1/photos" multiple>
+        <input id="file_upload" type="file" name="files[]" data-url="/api/photos" multiple>
     </div>
     <div class="progress">
         <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
