@@ -5,7 +5,8 @@ var db = require('../models'),
     path = require('path'),
     fs = require('fs'),
     appDir = path.dirname(require.main.filename),
-    mimeTypes = ['image/gif', 'image/jpeg', 'image/pjpeg', 'image/tiff', 'image/png'];
+    mimeTypes = ['image/gif', 'image/jpeg', 'image/pjpeg', 'image/tiff', 'image/png'],
+    photoFolder = '\\public\\host_photos\\';
 
 exports.index = function (req, res) {
     db.Photo.findAll({
@@ -33,8 +34,12 @@ exports.single = function (req, res) {
         })
 };
 
+/**
+ * Uploads photos in the photo folder and create them in the database.
+ */
 exports.create = function (req, res) {
 
+    // Declare variables
     var created = 0;
     var errors = 0;
     var chainer = new db.Sequelize.Utils.QueryChainer;
@@ -57,22 +62,38 @@ exports.create = function (req, res) {
         }
 
         var newFileName = path.basename(file.path);
-        var newPath = appDir + '\\public\\host_photos\\' + newFileName;
+        var newPath = appDir + photoFolder + newFileName;
 
-        fs.rename(file.path, newPath, function (err) {
+        // Move the photo from the temporary path to the new path
+        fs.rename(file.path, newPath, function (error) {
+
+            // Handle errror
+            if (error) {
+                console.error('Cannot move photo ' + file.originalFilename + ' to ' + newPath + '.');
+                console.error(error);
+                return;
+            }
+
+            // Log
             console.log('Photo \'' + file.originalFilename + '\' moved to host_photo public folder (\'' + newFileName + '\').');
 
+            // Create the photo in the database
             chainer.add(
-                db.Photo
-                    .create({ whid: req.body.hostId, fileName: newFileName })
-                    .success(function (photo) {
-                        created++;
-                        console.log('Photo \'' + newFileName + '\' added in database.');
-                    })
+                db.Photo.create({
+                    fileName: newFileName,
+                    hostId: req.body.hostId
+                }).success(function (photo) {
+                    created++;
+                    console.log('Photo \'' + newFileName + '\' added in database.');
+                }).error(function (error) {
+                    // Remove file
+                    fs.unlink(newPath);
+                })
             );
         });
     });
 
+    // Make sure all 'create' operations are complete before returning response
     chainer
         .run()
         .success(function (result) {
