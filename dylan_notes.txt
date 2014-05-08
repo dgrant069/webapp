@@ -1,0 +1,10 @@
+1. A user creates an account - Need to add template for user profile, then a transition to in the save function to it. 
+	once we have this we can add validators to the form fields.
+	(what to do with email sent to user for verification?)
+
+2. The user has a button on the home page saying "create my host profile" - May want to create checkbox on sign in to 
+	indicate what they want to be; a wwoofer or host (or both). User profile page should indicate what account type they haveAdd conditional to profile template indicating create 
+	host account. If clicked - the user is taken to the hosts/new route
+3. After creating is profile, the user is taken to /host/{id}/edit to complete his profile (photos)
+The user must have uploaded at least one photo before he can click "submit for validation"
+The admin can then see the hosts waiting for validation and validate
