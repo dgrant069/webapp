@@ -13,7 +13,7 @@
     "test": "brunch test"
   },
   "dependencies": {
-    "auto-reload-brunch": ">= 1.0 < 1.8",
+    "auto-reload-brunch": ">= 2.7.0",
     "clean-css-brunch": ">= 1.0 < 1.8",
     "css-brunch": ">= 1.0 < 1.8",
     "ember-handlebars-brunch": "~1.2.0",
