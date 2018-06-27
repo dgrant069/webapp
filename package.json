@@ -10,14 +10,16 @@
   "scripts": {
     "build": "brunch watch",
     "start": "node-dev server.js",
-    "test": "brunch test"
+    "test": "brunch test",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "dependencies": {
     "auto-reload-brunch": ">= 1.0 < 1.8",
     "clean-css-brunch": ">= 1.0 < 1.8",
     "css-brunch": ">= 1.0 < 1.8",
     "ember-handlebars-brunch": "~1.2.0",
-    "express": "~3.4.8",
+    "express": "~4.16.0",
     "express-mailer": "~0.2.3",
     "express-mysql-session": "0.0.12",
     "express-session": "~1.0.3",
@@ -32,6 +34,8 @@
     "passport-local": "~1.0.0",
     "paypal-rest-sdk": "~0.8.0",
     "sequelize": "~1.7.2",
-    "uglify-js-brunch": ">= 1.0 < 1.8"
-  }
+    "uglify-js-brunch": ">= 1.0 < 1.8",
+    "snyk": "^1.85.0"
+  },
+  "snyk": true
 }
