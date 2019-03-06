@@ -17,7 +17,7 @@
     "clean-css-brunch": ">= 1.0 < 1.8",
     "css-brunch": ">= 1.0 < 1.8",
     "ember-handlebars-brunch": "~1.2.0",
-    "express": "~3.4.8",
+    "express": "~3.11.0",
     "express-mailer": "~0.2.3",
     "express-mysql-session": "0.0.12",
     "express-session": "~1.0.3",
