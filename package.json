@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "auto-reload-brunch": ">= 1.0 < 1.8",
-    "clean-css-brunch": ">= 1.0 < 1.8",
+    "clean-css-brunch": ">=3.0.0",
     "css-brunch": ">= 1.0 < 1.8",
     "ember-handlebars-brunch": "~1.2.0",
     "express": "~3.4.8",
