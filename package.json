@@ -31,7 +31,7 @@
     "passport-http-bearer": "~1.0.1",
     "passport-local": "~1.0.0",
     "paypal-rest-sdk": "~0.8.0",
-    "sequelize": "~1.7.2",
+    "sequelize": "~5.1.0",
     "uglify-js-brunch": ">= 1.0 < 1.8"
   }
 }
